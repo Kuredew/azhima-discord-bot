@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "pnpm tsx watch --env-file=.env src/index.ts",
-    "deploy": "pnpm tsx --env-file=.env src/deploy-commands.ts"
+    "dev": "tsx watch --env-file=.env src/index.ts",
+    "start": "tsx src/index.ts",
+    "deploy": "tsx --env-file=.env src/deploy-commands.ts"
   },
   "keywords": [],
   "author": "",
