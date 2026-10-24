@@ -1,5 +1,9 @@
 import { Client, Events, GatewayIntentBits, MessageFlags } from "discord.js";
 import { loadCommands } from "@/lib/loadCommands.js";
+import express from "express";
+
+const PORT = process.env.PORT || 8080;
+const app = express();
 
 const token = process.env.DISCORD_TOKEN;
 if (!token) throw new Error("DISCORD_TOKEN not filled in .env");
@@ -31,4 +35,25 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 });
 
-await client.login(token);
+app.get("/health", (_, res) => {
+  res.status(200).json({
+    status: "healthy",
+    timestamp: new Date().toISOString(),
+  });
+});
+
+const startApp = async () => {
+  try {
+    app.listen(PORT, () => {
+      console.log("Express running on port " + PORT);
+    });
+    console.log("Connecting to Discord...");
+
+    await client.login(token);
+  } catch (error) {
+    console.error("Failed starting application: ", error);
+    process.exit(1);
+  }
+};
+
+startApp();
