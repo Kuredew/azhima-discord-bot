@@ -8,16 +8,23 @@ const command: Command = {
     .setDescription("Leave the voice channel I'm currently on"),
 
   async execute(interaction) {
-    const guildId = interaction.guildId;
-    if (!guildId) return;
+    const guild = interaction.guild;
+    if (!guild) return;
 
-    const connection = getVoiceConnection(guildId);
-    if (!connection) {
+    const connection = getVoiceConnection(guild.id);
+    const botChannel = guild.members.me?.voice.channel;
+
+    if (!connection && !botChannel) {
       await interaction.reply("I'm not connected to any voice channel");
       return;
     }
 
-    connection.destroy();
+    if (connection) {
+      connection.destroy();
+    } else {
+      await guild.members.me?.voice.disconnect();
+    }
+
     await interaction.reply("Done!");
   },
 };
