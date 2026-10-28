@@ -19,15 +19,6 @@ const commands = await loadCommands();
 
 client.once(Events.ClientReady, (c) => {
   console.log(`Online as ${c.user.tag}`);
-
-  client.user?.setPresence({
-    activities: [
-      {
-        name: "After Effects",
-        type: ActivityType.Playing,
-      },
-    ],
-  });
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
