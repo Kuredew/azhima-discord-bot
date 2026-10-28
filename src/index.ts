@@ -71,4 +71,5 @@ const startApp = async () => {
   }
 };
 
+console.log("Starting app...");
 startApp();
