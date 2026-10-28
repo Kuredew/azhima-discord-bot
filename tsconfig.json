@@ -41,12 +41,9 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
 
-    // Menentukan direktori dasar untuk mencari modul non-relatif
-    "baseUrl": ".",
-
     // Menentukan pemetaan path alias yang relatif terhadap baseUrl
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["./src/*"]
     },
   },
 }
